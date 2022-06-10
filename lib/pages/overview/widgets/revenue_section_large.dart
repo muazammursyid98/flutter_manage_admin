@@ -29,7 +29,7 @@ class RevenueSectionLarge extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomText(
-                  text: "Revenue Chart",
+                  text: "Expenses Chart",
                   size: 20,
                   weight: FontWeight.bold,
                   color: lightGrey,
@@ -53,7 +53,7 @@ class RevenueSectionLarge extends StatelessWidget {
                 Row(
                   children: const [
                     RevenueInfo(
-                      title: "Today's revenue",
+                      title: "Today's expenses",
                       amount: "230",
                     ),
                     RevenueInfo(

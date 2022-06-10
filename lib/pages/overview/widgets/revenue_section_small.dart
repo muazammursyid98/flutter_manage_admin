@@ -6,17 +6,19 @@ import 'bar_chart.dart';
 import 'revenue_info.dart';
 
 class RevenueSectionSmall extends StatelessWidget {
+  const RevenueSectionSmall({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(24),
-      margin: EdgeInsets.symmetric(vertical: 30),
+      padding: const EdgeInsets.all(24),
+      margin: const EdgeInsets.symmetric(vertical: 30),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-              offset: Offset(0, 6),
+              offset: const Offset(0, 6),
               color: lightGrey.withOpacity(.1),
               blurRadius: 12)
         ],
@@ -30,7 +32,7 @@ class RevenueSectionSmall extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomText(
-                  text: "Revenue Chart",
+                  text: "Expenses Chart",
                   size: 20,
                   weight: FontWeight.bold,
                   color: lightGrey,
@@ -55,7 +57,7 @@ class RevenueSectionSmall extends StatelessWidget {
                 Row(
                   children: const [
                     RevenueInfo(
-                      title: "Toda\'s revenue",
+                      title: "Today's expenses",
                       amount: "230",
                     ),
                     RevenueInfo(

@@ -33,7 +33,7 @@ class AvailableDriversTable extends StatelessWidget {
               width: 10,
             ),
             CustomText(
-              text: "Available Drivers",
+              text: "Requests",
               color: lightGrey,
               weight: FontWeight.bold,
             )
@@ -48,42 +48,42 @@ class AvailableDriversTable extends StatelessWidget {
                   size: ColumnSize.L,
                 ),
                 DataColumn(
-                  label: Text('Location'),
+                  label: Text('Purpose'),
                 ),
                 DataColumn(
-                  label: Text('Rating'),
+                  label: Text('Stage'),
                 ),
                 DataColumn(
-                  label: Text('Action'),
+                  label: Text('Amount'),
                 ),
               ],
               rows: List<DataRow>.generate(
-                  7,
+                  17,
                   (index) => DataRow(cells: [
                         const DataCell(CustomText(
                           text: "User Name",
                         )),
                         const DataCell(CustomText(
-                          text: "Kumasi",
+                          text: "Lorem Ipsum Loret Lorem Ipsum Loret",
                         )),
                         DataCell(Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(Icons.star,
+                          children: const [
+                            Icon(Icons.star,
                                 color: Colors.deepOrange, size: 18),
-                            const SizedBox(width: 5),
-                            CustomText(text: "4.$index"),
+                            SizedBox(width: 5),
+                            CustomText(text: "Pending"),
                           ],
                         )),
                         DataCell(Container(
-                          decoration: BoxDecoration(
+                          /* decoration: BoxDecoration(
                               border: Border.all(color: active, width: 5),
                               color: light,
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(20)), */
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 6),
-                          child: const CustomText(
-                            text: "Available Delivery",
+                          child: CustomText(
+                            text: " ${index}432${index + 2}",
                           ),
                         )),
                       ]))),

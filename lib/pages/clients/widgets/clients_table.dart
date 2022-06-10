@@ -33,13 +33,13 @@ class ClientsTable extends StatelessWidget {
               size: ColumnSize.L,
             ),
             DataColumn(
-              label: Text('Location'),
+              label: Text('Purpose'),
             ),
             DataColumn(
-              label: Text('Rating'),
+              label: Text('Amount'),
             ),
             DataColumn(
-              label: Text('Action'),
+              label: Text('Stage'),
             ),
           ],
           rows: List<DataRow>.generate(
@@ -49,26 +49,25 @@ class ClientsTable extends StatelessWidget {
                       text: "User Name",
                     )),
                     const DataCell(CustomText(
-                      text: "Kumasi",
+                      text: "Lorem Ipsum Loret ",
                     )),
                     DataCell(Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.star,
-                            color: Colors.deepOrange, size: 18),
                         const SizedBox(width: 5),
                         CustomText(text: "4.$index"),
                       ],
                     )),
                     DataCell(Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: active, width: 5),
-                          color: light,
-                          borderRadius: BorderRadius.circular(20)),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 6),
-                      child: const CustomText(
-                        text: "Block Client",
+                      child: Row(
+                        children: const [
+                          Icon(Icons.star, color: Colors.deepOrange, size: 18),
+                          CustomText(
+                            text: "pending",
+                          ),
+                        ],
                       ),
                     )),
                   ]))),

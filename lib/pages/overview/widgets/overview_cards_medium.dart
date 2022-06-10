@@ -44,7 +44,7 @@ class OverviewCardsMediumScreen extends StatelessWidget {
               width: _width / 64,
             ),
             InfoCard(
-              title: "Requests Cancelled",
+              title: "Requests Rejected",
               value: "32",
               onTap: () {},
             ),
