@@ -19,16 +19,16 @@ class MenuItem {
   MenuItem(this.name, this.route);
 }
 
-List<MenuItem> sideMenuItemRoutes = [
+List<MenuItem> sideMenuItems = [
   MenuItem(overviewPageDisplayName, overviewPageRoute),
   MenuItem(driversPageDisplayName, driversPageRoute),
   MenuItem(clientsPageDisplayName, clientsPageRoute),
   MenuItem(authenticationPageDisplayName, authenticationPageRoute),
 ];
 //TODO: delete
-List sideMenuItems = [
+/* List sideMenuItems = [
   overviewPageRoute,
   driversPageRoute,
   clientsPageRoute,
   authenticationPageRoute
-];
+]; */

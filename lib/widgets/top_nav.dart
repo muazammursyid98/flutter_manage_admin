@@ -11,7 +11,7 @@ AppBar topNaigatorBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
               children: [
                 Container(
                   padding: const EdgeInsets.only(left: 14),
-                  child: Image.asset("asset/icons/logo.png", width: 28),
+                  child: Image.asset("assets/icons/logo.png", width: 28),
                 )
               ],
             )
@@ -29,7 +29,7 @@ AppBar topNaigatorBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
             Visibility(
                 visible: !ResponsiveWidget.isSmallScreen(context),
                 child: CustomText(
-                  text: "Dash",
+                  text: "Dext",
                   color: lightGrey,
                   size: 20,
                   weight: FontWeight.bold,
