@@ -2,6 +2,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
 import '../../../constants/style.dart';
+import '../../../controller/expenditure_controller.dart';
 
 /* class SimpleBarChart extends StatelessWidget {
   final List<charts.Series<dynamic, String>> seriesList;
@@ -58,6 +59,7 @@ class OrdinalSales {
 class SimpleBarChart extends StatelessWidget {
   final List<charts.Series<dynamic, String>> seriesList;
   final bool? animate;
+  final ExpenditureController _expenditureController = ExpenditureController();
 
   SimpleBarChart(this.seriesList, {this.animate});
 
