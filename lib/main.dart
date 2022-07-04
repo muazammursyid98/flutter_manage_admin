@@ -1,7 +1,9 @@
+
 import 'package:dext_expenditure_dashboard/constants/controllers.dart';
 import 'package:dext_expenditure_dashboard/constants/style.dart';
 import 'package:dext_expenditure_dashboard/layout.dart';
 import 'package:dext_expenditure_dashboard/pages/authentication/authentication.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,7 +52,9 @@ class MyApp extends StatelessWidget {
         }),
         primaryColor: Colors.blue,
       ),
+
       // home: AuthenticationPage(),
+
     );
   }
 }
