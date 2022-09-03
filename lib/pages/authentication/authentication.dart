@@ -4,11 +4,16 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants/style.dart';
+import '../../controllers/authentication_controller.dart';
+import '../../controllers/counter_controller.dart';
 import '../../layout.dart';
 import '../../routing/routes.dart';
 
 class AuthenticationPage extends StatelessWidget {
-  const AuthenticationPage({Key? key}) : super(key: key);
+  AuthenticationPage({Key? key}) : super(key: key);
+
+  final AuthenticationController authController =
+      Get.put(AuthenticationController());
 
   @override
   Widget build(BuildContext context) {
@@ -54,14 +59,16 @@ class AuthenticationPage extends StatelessWidget {
                 height: 15,
               ),
               TextField(
+                controller: authController.usernameTxt,
                 decoration: InputDecoration(
-                    labelText: "Email",
-                    hintText: "abc@domain.com",
+                    labelText: "Username",
+                    hintText: "abc",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20))),
               ),
               const SizedBox(height: 15),
               TextField(
+                controller: authController.passwordTxt,
                 obscureText: true,
                 decoration: InputDecoration(
                     labelText: "Password",
@@ -79,16 +86,16 @@ class AuthenticationPage extends StatelessWidget {
                       const CustomText(text: "Remeber Me"),
                     ],
                   ),
-                  CustomText(text: "Forgot password?", color: active)
+                  //CustomText(text: "Forgot password?", color: active)
                 ],
               ),
               const SizedBox(height: 15),
               InkWell(
                 onTap: () {
                   // route in adress bar
-                  Get.offAllNamed(rootRoute);
+                  //Get.offAllNamed(rootRoute);
                   //
-                  Get.offAll(() => SiteLayout());
+                  authController.getLoginAdmin();
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -103,13 +110,13 @@ class AuthenticationPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              RichText(
-                  text: TextSpan(children: [
-                const TextSpan(text: "Do not have admin credentials? "),
-                TextSpan(
-                    text: "Request Credentials! ",
-                    style: TextStyle(color: active))
-              ]))
+              // RichText(
+              //     text: TextSpan(children: [
+              //   const TextSpan(text: "Do not have admin credentials? "),
+              //   TextSpan(
+              //       text: "Request Credentials! ",
+              //       style: TextStyle(color: active))
+              // ]))
             ],
           ),
         ),
