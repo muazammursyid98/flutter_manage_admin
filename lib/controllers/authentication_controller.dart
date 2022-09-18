@@ -12,13 +12,21 @@ class AuthenticationController extends GetxController {
 
   TextEditingController usernameTxt = TextEditingController();
   TextEditingController passwordTxt = TextEditingController();
+  var isLoading = false.obs;
 
   void getLoginAdmin() async {
+    isLoading.value = true;
     int statusRepsonse = await _authenticationService
         .authenticationLogin(
             username: usernameTxt.text, password: passwordTxt.text)
         .catchError((onError) {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        isLoading.value = false;
+      });
       const SnackBars().snackBarFail("Unable to login", "");
+    });
+    Future.delayed(const Duration(milliseconds: 500), () {
+      isLoading.value = false;
     });
     if (statusRepsonse == 200) {
       //Get.offAllNamed(rootRoute);

@@ -3,6 +3,7 @@ import 'package:dext_expenditure_dashboard/widgets/small_screen.dart';
 import 'package:dext_expenditure_dashboard/widgets/top_nav.dart';
 import 'package:flutter/material.dart';
 
+import 'constants/size_config.dart';
 import 'widgets/large_screen.dart';
 import 'widgets/side_menu.dart';
 
@@ -12,6 +13,7 @@ class SiteLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       key: scaffoldKey,
       extendBodyBehindAppBar: true,

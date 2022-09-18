@@ -4,10 +4,12 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:dext_expenditure_dashboard/model/expenditure_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import '../../../constants/globals.dart' as global;
 
 import '../../../constants/style.dart';
 import '../../../controller/expenditure_controller.dart';
+import '../../../controllers/users_controller.dart';
 import '../../../widgets/custom_text.dart';
 
 /// Example without a datasource
@@ -27,6 +29,8 @@ class _AvailableDriversTableState extends State<AvailableDriversTable> {
 
     return expenditure;
   }
+
+  final UsersController counterController = Get.put(UsersController());
 
   Widget build(BuildContext context) {
     /*Future<Expenditure?> exp = _expenditureController.getUncompleteExpenditure(
@@ -60,107 +64,81 @@ class _AvailableDriversTableState extends State<AvailableDriversTable> {
               width: 10,
             ),
             CustomText(
-              text: "Requests",
+              text: "List of Users",
               color: lightGrey,
               weight: FontWeight.bold,
             )
           ]),
           SingleChildScrollView(
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.51),
-              child: FutureBuilder(
-                future: _expenditureController.getExpenditures(
-                    /* 
-                  "stage",
-                  '"pending"',
-                  "stage",
-                  '"approved"',
-                  "requester",
-                  userId.toString(), */
-                    ),
-                builder: (context, snapshot) {
-                  //Checks if data is available
-                  if (snapshot.connectionState == ConnectionState.waiting &&
-                      snapshot.data == null) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.data == null) {
-                    return const Text(
-                      'Something went Wrong',
-                      style: TextStyle(fontSize: 30),
-                    );
-                  }
-
-                  Expenditure expenditure = snapshot.data as Expenditure;
-
-                  return ListView.separated(
-                      itemBuilder: (BuildContext context, int index) {
-                        return SingleChildScrollView(
-                            child: DataTable2(
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.51),
+                child: Obx(
+                  () => counterController.isLoading.value == true
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : ListView.separated(
+                          itemBuilder: (BuildContext context, int index) {
+                            return SingleChildScrollView(
+                              child: DataTable2(
                                 columnSpacing: 12,
                                 horizontalMargin: 12,
-                                minWidth: 600,
+                                minWidth: 1200,
                                 columns: const [
                                   DataColumn2(
                                     label: Text('Name'),
                                     size: ColumnSize.L,
                                   ),
                                   DataColumn(
-                                    label: Text('Purpose'),
+                                    label: Text('Phone Number'),
                                   ),
                                   DataColumn(
-                                    label: Text('Stage'),
+                                    label: Text('Email'),
                                   ),
                                   DataColumn(
-                                    label: Text('Amount'),
+                                    label: Text('Purchased Count'),
                                   ),
                                 ],
-                                rows:
-                                    /*  List<DataRow>.generate(getexpenditure().
-                            (index) => _dessertsDataSource.getRow(index))), */
-
-                                    List<DataRow>.generate(
-                                        expenditure.data!.length,
-                                        (index) => DataRow(cells: [
-                                              const DataCell(CustomText(
-                                                  text: "User Name")),
-                                              DataCell(CustomText(
-                                                text: expenditure
-                                                    .data![index].purpose!,
-                                              )),
-                                              DataCell(Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  const Icon(Icons.star,
-                                                      color: Colors.deepOrange,
-                                                      size: 18),
-                                                  const SizedBox(width: 5),
-                                                  CustomText(
-                                                      text: expenditure
-                                                          .data![index].stage!),
-                                                ],
-                                              )),
-                                              DataCell(Container(
-                                                /* decoration: BoxDecoration(
+                                rows: List<DataRow>.generate(
+                                    counterController.statusRepsonseDisplay
+                                        .value.length, (index) {
+                                  final item = counterController
+                                      .statusRepsonseDisplay[index];
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(CustomText(text: item.name)),
+                                      DataCell(CustomText(
+                                        text: item.phoneNumber,
+                                      )),
+                                      DataCell(Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          // const Icon(Icons.star,
+                                          //     color: Colors.deepOrange,
+                                          //     size: 18),
+                                          // const SizedBox(width: 5),
+                                          CustomText(text: item.email),
+                                        ],
+                                      )),
+                                      DataCell(Container(
+                                        /* decoration: BoxDecoration(
                                     border: Border.all(color: active, width: 5),
                                     color: light,
                                     borderRadius: BorderRadius.circular(20)), */
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 12,
-                                                        vertical: 6),
-                                                child: CustomText(
-                                                  text: expenditure
-                                                      .data![index].amount!,
-                                                ),
-                                              )),
-                                            ]))));
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 6),
+                                        child: CustomText(
+                                          text: item.count,
+                                        ),
+                                      )),
+                                    ],
+                                  );
+                                }),
+                              ),
+                            );
 
-                        /* ListTile(
+                            /* ListTile(
                           leading: Icon(
                             Icons.monetization_on,
                             color: colorCode(expenditure.data![index].stage!),
@@ -188,67 +166,13 @@ class _AvailableDriversTableState extends State<AvailableDriversTable> {
                                                     )); */
                           },
                         ); */
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(
-                            height: 5,
-                          ),
-                      itemCount: 1);
-                },
-
-                /*  child: DataTable2(
-                    columnSpacing: 12,
-                    horizontalMargin: 12,
-                    minWidth: 600,
-                    columns: const [
-                      DataColumn2(
-                        label: Text('Name'),
-                        size: ColumnSize.L,
-                      ),
-                      DataColumn(
-                        label: Text('Purpose'),
-                      ),
-                      DataColumn(
-                        label: Text('Stage'),
-                      ),
-                      DataColumn(
-                        label: Text('Amount'),
-                      ),
-                    ],
-                    rows: 
-                        /*  List<DataRow>.generate(getexpenditure().
-                            (index) => _dessertsDataSource.getRow(index))), */
-              
-                        List<DataRow>.generate(
-                            17,
-                            (index) => DataRow(cells: [
-                                  const DataCell(CustomText(text: "User Name")),
-                                  const DataCell(CustomText(
-                                    text: "Lorem Ipsum Loret Lorem Ipsum Loret",
-                                  )),
-                                  DataCell(Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: const [
-                                      Icon(Icons.star,
-                                          color: Colors.deepOrange, size: 18),
-                                      SizedBox(width: 5),
-                                      CustomText(text: "Pending"),
-                                    ],
-                                  )),
-                                  DataCell(Container(
-                                    /* decoration: BoxDecoration(
-                                    border: Border.all(color: active, width: 5),
-                                    color: light,
-                                    borderRadius: BorderRadius.circular(20)), */
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 6),
-                                    child: CustomText(
-                                      text: " ${index}432${index + 2}",
-                                    ),
-                                  )),
-                                ]))), */
-              ),
-            ),
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(
+                                height: 5,
+                              ),
+                          itemCount: 1),
+                )),
           ),
         ],
       ),

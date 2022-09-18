@@ -26,8 +26,8 @@ class MenuController extends GetxController {
     switch (itemName) {
       case overviewPageDisplayName:
         return _customIcon(Icons.trending_up, itemName);
-      case driversPageDisplayName:
-        return _customIcon(Icons.drive_eta, itemName);
+      case transactionPageDisplayName:
+        return _customIcon(Icons.money_off, itemName);
       case clientsPageDisplayName:
         return _customIcon(Icons.people_alt_outlined, itemName);
       case authenticationPageDisplayName:

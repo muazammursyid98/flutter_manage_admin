@@ -3,7 +3,34 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
+import '../model/all_users_model.dart';
+import '../widgets/snackbars.dart';
+
 class UsersService {
+  Future<List<Record>?> getAllUsers() async {
+    final response = await post(
+      Uri.parse('https://rentasadventures.com/API/get_users.php'),
+      headers: <String, String>{
+        // 'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'authKey': "key123",
+      }),
+    ).catchError((onError) {
+      const SnackBars().snackBarFail("Error", "");
+    });
+
+    if (response.statusCode == 200) {
+      final listUsers = listUsersFromJson(response.body);
+
+      return listUsers.records;
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      return [];
+    }
+  }
+
   //Get all users
 
   Future<Response> getUsers() async {

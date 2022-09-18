@@ -1,4 +1,3 @@
-
 import 'package:dext_expenditure_dashboard/constants/controllers.dart';
 import 'package:dext_expenditure_dashboard/constants/style.dart';
 import 'package:dext_expenditure_dashboard/layout.dart';
@@ -7,7 +6,9 @@ import 'package:dext_expenditure_dashboard/pages/authentication/authentication.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'constants/size_config.dart';
 import 'controllers/menu_controller.dart';
 import 'controllers/navigation_controller.dart';
 import 'pages/404/error.dart';
@@ -24,37 +25,38 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialRoute: authenticationPageRoute,
-      unknownRoute: GetPage(
-          name: '/not-found',
-          page: () => PageNotFound(),
-          transition: Transition.fadeIn),
-      getPages: [
-        GetPage(
-            name: rootRoute,
-            page: () {
-              return SiteLayout();
-            }),
-        GetPage(
-            name: authenticationPageRoute, page: () => AuthenticationPage()),
-      ],
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return GetMaterialApp(
+        initialRoute: authenticationPageRoute,
+        unknownRoute: GetPage(
+            name: '/not-found',
+            page: () => PageNotFound(),
+            transition: Transition.fadeIn),
+        getPages: [
+          GetPage(
+              name: rootRoute,
+              page: () {
+                return SiteLayout();
+              }),
+          GetPage(
+              name: authenticationPageRoute, page: () => AuthenticationPage()),
+        ],
 
-      debugShowCheckedModeBanner: false,
-      title: "Dashboard",
-      theme: ThemeData(
-        scaffoldBackgroundColor: light,
-        textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.black),
-        pageTransitionsTheme: const PageTransitionsTheme(builders: {
-          TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
-          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-        }),
-        primaryColor: Colors.blue,
-      ),
+        debugShowCheckedModeBanner: false,
+        title: "Dashboard",
+        theme: ThemeData(
+          scaffoldBackgroundColor: light,
+          textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme)
+              .apply(bodyColor: Colors.black),
+          pageTransitionsTheme: const PageTransitionsTheme(builders: {
+            TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+          }),
+          primaryColor: Colors.blue,
+        ),
 
-      // home: AuthenticationPage(),
-
-    );
+        // home: AuthenticationPage(),
+      );
+    });
   }
 }
