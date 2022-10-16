@@ -235,12 +235,13 @@ class _MyDialogState extends State<MyDialog> {
                                       ? ""
                                       : registerSlot.text,
                                   "locationName": location.text,
-                                  "imageName": photoName,
+                                  "imageName": photoName!,
                                   "imageBase64": base64Photo,
                                   "price": double.parse(pricing.text)
                                       .toStringAsFixed(2),
                                   "activityId": widget.element.activityId
                                 };
+
                                 int statusResponse = await counterController
                                     .updateTheActivity(jsons);
                                 if (statusResponse == 200) {

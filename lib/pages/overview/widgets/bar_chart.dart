@@ -94,7 +94,7 @@ class SimpleBarChart extends StatelessWidget {
 
     return [
       charts.Series<OrdinalSales, String>(
-        id: 'Expenses',
+        id: 'Sales',
         colorFn: (_, __) => charts.ColorUtil.fromDartColor(active),
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,

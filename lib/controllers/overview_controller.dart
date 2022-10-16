@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../model/calendar_model.dart';
 import '../service/overview_service.dart';
@@ -10,20 +11,29 @@ import '../service/overview_service.dart';
 class OverviewController extends GetxController {
   final OverviewService _overviewService = OverviewService();
 
-  var isLoading = true.obs;
+  RxBool isLoading = false.obs;
 
-  List<dynamic> displayDateCalendar = [].obs;
+  RxList<dynamic> displayDateCalendar = [].obs;
+
+  Rx<CalendarController> controller = CalendarController().obs;
+
+  Rx<DateTime> dateTimeSelected = DateTime.now().obs;
 
   @override
   void onInit() {
-    getCalendarOverview();
+    getCalendarOverview(DateTime.now());
+    ever(dateTimeSelected, (value) {
+      print("here");
+      print(value);
+      getCalendarOverview(DateTime.parse(value.toString()));
+    });
     super.onInit();
   }
 
-  getCalendarOverview() async {
+  getCalendarOverview(DateTime value) async {
     isLoading.value = true;
     var jsons = {
-      "monthDate": DateFormat('yyyy-MM-dd').format(DateTime.now()),
+      "monthDate": DateFormat('yyyy-MM-dd').format(value),
     };
     List<Record>? statusRepsonse =
         await _overviewService.calendarOverview(jsons);
@@ -57,10 +67,9 @@ class OverviewController extends GetxController {
         }
       }
     }
+    displayDateCalendar(jsonsDateTime);
 
-    displayDateCalendar = jsonsDateTime;
-
-    Future.delayed(const Duration(milliseconds: 500), () {
+    await Future.delayed(const Duration(milliseconds: 500), () {
       isLoading.value = false;
     });
   }

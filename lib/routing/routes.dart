@@ -9,6 +9,9 @@ const transactionPageRoute = "/transaction";
 const clientsPageDisplayName = "Activity";
 const clientsPageRoute = "/clients";
 
+const salesPageDisplayName = "Sales";
+const salesPageRoute = "/sales";
+
 const authenticationPageDisplayName = "Log out";
 const authenticationPageRoute = "/auth";
 
@@ -23,6 +26,7 @@ List<MenuItem> sideMenuItems = [
   MenuItem(overviewPageDisplayName, overviewPageRoute),
   MenuItem(transactionPageDisplayName, transactionPageRoute),
   MenuItem(clientsPageDisplayName, clientsPageRoute),
+  MenuItem(salesPageDisplayName, salesPageRoute),
   MenuItem(authenticationPageDisplayName, authenticationPageRoute),
 ];
 //TODO: delete

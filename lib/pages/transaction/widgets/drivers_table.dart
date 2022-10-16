@@ -1,6 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants/style.dart';
 import '../../../controllers/transaction_controller.dart';
@@ -14,6 +15,7 @@ class DriversTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       margin: const EdgeInsets.only(bottom: 30),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -48,13 +50,13 @@ class DriversTable extends StatelessWidget {
                     label: Text('Email'),
                   ),
                   DataColumn(
-                    label: Text('Count'),
+                    label: Text('Activity Name'),
                   ),
                   DataColumn(
                     label: Text('Total Person'),
                   ),
                   DataColumn(
-                    label: Text('Total Price'),
+                    label: Text('Total Price (RM)'),
                   ),
                   DataColumn(
                     label: Text('Shift Slot'),
@@ -134,7 +136,8 @@ class DriversTable extends StatelessWidget {
                                 text: element.totalBookedSlot,
                               )),
                               DataCell(CustomText(
-                                text: element.totalPrice,
+                                text: double.parse(element.totalPrice)
+                                    .toStringAsFixed(2),
                               )),
                               DataCell(CustomText(
                                 text: element.shiftName,
@@ -169,12 +172,14 @@ class DriversTable extends StatelessWidget {
                               //   ),
                               // )),
                               DataCell(CustomText(
-                                text: element.createdDate.toString(),
+                                text: DateFormat('dd/MM/yyyy hh:mm a')
+                                    .format(element.createdDate),
                               )),
                             ],
                           ),
                         ),
-                      ]),
+                      ],
+              ),
       ),
     );
   }

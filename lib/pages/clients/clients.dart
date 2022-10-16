@@ -36,7 +36,7 @@ class ClientsPage extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (_) {
-                        return DialogAddActivity();
+                        return const DialogAddActivity();
                       }).then((value) {
                     counterController.onInit();
                   });
@@ -45,12 +45,10 @@ class ClientsPage extends StatelessWidget {
             const SizedBox(width: 9),
           ],
         ),
-        Expanded(
-            child: ListView(
-          children: [
-            ClientsTable(),
-          ],
-        )),
+        const SizedBox(height: 30),
+        const Expanded(
+          child: ClientsTable(),
+        ),
       ],
     );
   }

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../constants/controllers.dart';
 import '../../controllers/transaction_controller.dart';
 import '../../helpers/responsiveness.dart';
+import '../clients/widgets/special_booking.dart';
 import 'widgets/drivers_table.dart';
 
 class TransactionPage extends StatelessWidget {
@@ -30,6 +31,17 @@ class TransactionPage extends StatelessWidget {
                       top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6),
                   child: CustomText(
                     text: menuController.activeItem.value,
+                    size: 24,
+                    weight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: ResponsiveWidget.isSmallScreen(context) ? 56 : 6,
+                      left: 0),
+                  child: CustomText(
+                    text:
+                        " for ${counterController.dateTimeSelectedDisplay.value}",
                     size: 24,
                     weight: FontWeight.bold,
                   ),
@@ -63,7 +75,7 @@ class TransactionPage extends StatelessWidget {
                     context: context,
                     config: config,
                     dialogSize: const Size(325, 400),
-                    borderRadius: 15,
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
                     initialValue: [],
                     dialogBackgroundColor: Colors.white,
                   );
@@ -75,14 +87,24 @@ class TransactionPage extends StatelessWidget {
                   }
                 },
                 child: const Text("Select Date By Range")),
+            const SizedBox(width: 9),
+            ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        return const DialogSpecialBooking();
+                      }).then((value) {
+                    counterController.onInit();
+                  });
+                },
+                child: const Text("Special Booking")),
           ],
         ),
+        const SizedBox(height: 30),
         Expanded(
-            child: ListView(
-          children: [
-            DriversTable(),
-          ],
-        )),
+          child: DriversTable(),
+        ),
       ],
     );
   }

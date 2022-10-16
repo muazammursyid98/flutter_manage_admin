@@ -1,10 +1,13 @@
 import 'package:dext_expenditure_dashboard/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../constants/controllers.dart';
 import '../../controllers/overview_controller.dart';
+import '../../controllers/transaction_controller.dart';
 import '../../helpers/responsiveness.dart';
 
 class OverviewPage extends StatelessWidget {
@@ -14,6 +17,7 @@ class OverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    counterController.dateTimeSelected.value = DateTime.now();
     return Column(
       children: [
         Obx(() => Row(
@@ -32,10 +36,47 @@ class OverviewPage extends StatelessWidget {
             ? const Expanded(child: Center(child: CircularProgressIndicator()))
             : Expanded(
                 child: SfCalendar(
+                  controller: counterController.controller.value,
                   initialDisplayDate: DateTime.now(),
-                  onTap: ((calendarTapDetails) {
-                    print("here");
+                  onViewChanged: ((viewChangedDetails) {
+                    SchedulerBinding.instance.addPostFrameCallback((duration) {
+                      counterController.dateTimeSelected.value =
+                          viewChangedDetails.visibleDates[
+                              viewChangedDetails.visibleDates.length ~/ 2];
+                      // counterController.getCalendarOverview(
+                      //     viewChangedDetails.visibleDates[
+                      //         viewChangedDetails.visibleDates.length ~/ 2]);
+                    });
+                    // if (_controller.displayDate != null) {
+                    //   int getMiddleArray =
+                    //       (viewChangedDetails.visibleDates.length / 2).floor();
+                    //   // counterController
+                    //   //     .getCalendarOverview(_controller.displayDate!);
+                    //   counterController.getCalendarOverview(
+                    //       viewChangedDetails.visibleDates[getMiddleArray]);
+                    // }
                   }),
+
+                  onSelectionChanged: (((viewChangedDetails) {
+                    if (viewChangedDetails.date != null) {
+                      final TransactionController transactionController =
+                          Get.put(TransactionController());
+
+                      transactionController.dateTimeSelectedDisplay.value =
+                          DateFormat('dd/MM/yyyy')
+                              .format(viewChangedDetails.date!);
+                      transactionController.getTransactionByDateRange(
+                          firstDate: DateFormat('yyyy-MM-dd')
+                              .format(viewChangedDetails.date!),
+                          endDate: 'null');
+                      if (!menuController.isActive('Transaction')) {
+                        menuController.changeActiveItemTo('Transaction');
+                        if (ResponsiveWidget.isSmallScreen(context)) Get.back();
+                        navigationController.navigateTo('/transaction');
+                      }
+                    }
+                  })),
+
                   allowAppointmentResize: true,
                   showNavigationArrow: true,
                   showDatePickerButton: true,
@@ -77,6 +118,7 @@ class OverviewPage extends StatelessWidget {
   }
 
   List<Meeting> _getDataSource() {
+    counterController.isLoading.value = true;
     final List<Meeting> meetings = <Meeting>[];
     // final DateTime today = DateTime.now();
     // final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
@@ -89,12 +131,16 @@ class OverviewPage extends StatelessWidget {
     //     '10 Purchased', startTime, endTime, const Color(0xFF0F8644), false));
     // meetings.add(Meeting('5 Purchased', startTimeOne, endTimeOne,
     //     const Color(0xFF0F8644), false));
-
+    // counterController.isLoading(true);
     for (var item in counterController.displayDateCalendar) {
       DateTime dateTimeDisplay = DateTime.parse(item["dateTimeCalendar"]);
       meetings.add(Meeting('- ${item["count"]} Purchases Ticket',
           dateTimeDisplay, dateTimeDisplay, const Color(0xFF0F8644), false));
     }
+    counterController.isLoading.value = false;
+    // Future.delayed(const Duration(seconds: 1), () {
+    //   counterController.isLoading(false);
+    // });
     return meetings;
   }
 }

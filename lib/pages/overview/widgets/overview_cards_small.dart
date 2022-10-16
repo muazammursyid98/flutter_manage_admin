@@ -12,7 +12,7 @@ class OverviewCardsSmallScreen extends StatelessWidget {
       child: Column(
         children: [
           InfoCardSmall(
-            title: "Requests Pending",
+            title: "Today Purchased Ticket",
             value: "7",
             onTap: () {},
             isActive: true,

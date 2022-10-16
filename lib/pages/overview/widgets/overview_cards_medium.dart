@@ -13,7 +13,7 @@ class OverviewCardsMediumScreen extends StatelessWidget {
         Row(
           children: [
             InfoCard(
-              title: "Requests pending",
+              title: "Today Purchased Ticket",
               value: "7",
               onTap: () {},
               topColor: Colors.orange,

@@ -1,7 +1,9 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../model/transaction_model.dart';
+
 import '../service/transaction_service.dart';
 
 class TransactionController extends GetxController {
@@ -10,6 +12,9 @@ class TransactionController extends GetxController {
   var statusRepsonseDisplay = [].obs;
   var isLoading = true.obs;
   String nowCalled = "";
+  RxString dateTimeSelectedDisplay = "".obs;
+
+  var activityList = [].obs;
 
   @override
   void onInit() {
@@ -37,6 +42,9 @@ class TransactionController extends GetxController {
 
   void getTransactionToday() async {
     nowCalled = "todayTransaction";
+    String firstDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
+    dateTimeSelectedDisplay.value = firstDate;
+
     statusRepsonseDisplay.value = [];
     isLoading.value = true;
     List<Record>? statusRepsonse =
@@ -50,6 +58,7 @@ class TransactionController extends GetxController {
 
   void getTransactionByDateRange(
       {required String firstDate, required String endDate}) async {
+    endDate == 'null' ? endDate = firstDate : endDate = endDate;
     nowCalled = "transaction";
     statusRepsonseDisplay.value = [];
     isLoading.value = true;
@@ -85,12 +94,19 @@ class TransactionController extends GetxController {
               .join(', ')
           : 'null';
     } else if (datePickerType == CalendarDatePicker2Type.range) {
+      DateFormat dateFormat = DateFormat('dd/MM/yyyy');
       if (values.isNotEmpty) {
         var startDate = values[0].toString().replaceAll('00:00:00.000', '');
         var endDate = values.length > 1
             ? values[1].toString().replaceAll('00:00:00.000', '')
             : 'null';
-        valueText = '$startDate to $endDate';
+        if (endDate == 'null') {
+          valueText = dateFormat.format(values[0]!);
+        } else {
+          valueText =
+              '${dateFormat.format(values[0]!)} to ${dateFormat.format(values[1]!)}';
+        }
+        dateTimeSelectedDisplay.value = valueText;
         getTransactionByDateRange(firstDate: startDate, endDate: endDate);
       } else {
         return 'null';

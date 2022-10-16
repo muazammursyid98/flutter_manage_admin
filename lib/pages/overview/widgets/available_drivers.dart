@@ -64,7 +64,7 @@ class _AvailableDriversTableState extends State<AvailableDriversTable> {
               width: 10,
             ),
             CustomText(
-              text: "List of Users",
+              text: "List of Users Purchased Ticket",
               color: lightGrey,
               weight: FontWeight.bold,
             )
@@ -73,106 +73,65 @@ class _AvailableDriversTableState extends State<AvailableDriversTable> {
             child: ConstrainedBox(
                 constraints: BoxConstraints(
                     maxHeight: MediaQuery.of(context).size.height * 0.51),
-                child: Obx(
-                  () => counterController.isLoading.value == true
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : ListView.separated(
-                          itemBuilder: (BuildContext context, int index) {
-                            return SingleChildScrollView(
-                              child: DataTable2(
-                                columnSpacing: 12,
-                                horizontalMargin: 12,
-                                minWidth: 1200,
-                                columns: const [
-                                  DataColumn2(
-                                    label: Text('Name'),
-                                    size: ColumnSize.L,
-                                  ),
-                                  DataColumn(
-                                    label: Text('Phone Number'),
-                                  ),
-                                  DataColumn(
-                                    label: Text('Email'),
-                                  ),
-                                  DataColumn(
-                                    label: Text('Purchased Count'),
-                                  ),
+                child: Obx(() => counterController.isLoading.value == true
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : DataTable2(
+                        columnSpacing: 12,
+                        horizontalMargin: 12,
+                        minWidth: 1200,
+                        columns: const [
+                          DataColumn2(
+                            label: Text('Name'),
+                            size: ColumnSize.L,
+                          ),
+                          DataColumn(
+                            label: Text('Phone Number'),
+                          ),
+                          DataColumn(
+                            label: Text('Email'),
+                          ),
+                          DataColumn(
+                            label: Text('Purchased Count'),
+                          ),
+                        ],
+                        rows: List<DataRow>.generate(
+                            counterController
+                                .statusRepsonseDisplay.value.length, (index) {
+                          final item =
+                              counterController.statusRepsonseDisplay[index];
+                          return DataRow(
+                            cells: [
+                              DataCell(CustomText(text: item.name)),
+                              DataCell(CustomText(
+                                text: item.phoneNumber,
+                              )),
+                              DataCell(Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // const Icon(Icons.star,
+                                  //     color: Colors.deepOrange,
+                                  //     size: 18),
+                                  // const SizedBox(width: 5),
+                                  CustomText(text: item.email),
                                 ],
-                                rows: List<DataRow>.generate(
-                                    counterController.statusRepsonseDisplay
-                                        .value.length, (index) {
-                                  final item = counterController
-                                      .statusRepsonseDisplay[index];
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(CustomText(text: item.name)),
-                                      DataCell(CustomText(
-                                        text: item.phoneNumber,
-                                      )),
-                                      DataCell(Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          // const Icon(Icons.star,
-                                          //     color: Colors.deepOrange,
-                                          //     size: 18),
-                                          // const SizedBox(width: 5),
-                                          CustomText(text: item.email),
-                                        ],
-                                      )),
-                                      DataCell(Container(
-                                        /* decoration: BoxDecoration(
-                                    border: Border.all(color: active, width: 5),
-                                    color: light,
-                                    borderRadius: BorderRadius.circular(20)), */
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 6),
-                                        child: CustomText(
-                                          text: item.count,
-                                        ),
-                                      )),
-                                    ],
-                                  );
-                                }),
-                              ),
-                            );
-
-                            /* ListTile(
-                          leading: Icon(
-                            Icons.monetization_on,
-                            color: colorCode(expenditure.data![index].stage!),
-                          ),
-                          trailing: Text(
-                            expenditure.data![index].amount!,
-                            style: const TextStyle(
-                                color: Colors.green, fontSize: 15),
-                          ),
-                          title: Text(
-                            expenditure.data![index].purpose!,
-                          ),
-                          onTap: () {
-                            /* 
-                                                    int tappedIndex = int.parse(
-                                                        expenditure
-                                                            .data![index].id);
-            
-                                                    Navigator.of(context)
-                                                        .push(MaterialPageRoute(
-                                                      builder: (context) => details(
-                                                          context,
-                                                          tappedIndex,
-                                                          userId),
-                                                    )); */
-                          },
-                        ); */
-                          },
-                          separatorBuilder: (BuildContext context, int index) =>
-                              const SizedBox(
-                                height: 5,
-                              ),
-                          itemCount: 1),
-                )),
+                              )),
+                              DataCell(Container(
+                                /* decoration: BoxDecoration(
+                                  border: Border.all(color: active, width: 5),
+                                  color: light,
+                                  borderRadius: BorderRadius.circular(20)), */
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 6),
+                                child: CustomText(
+                                  text: item.count,
+                                ),
+                              )),
+                            ],
+                          );
+                        }),
+                      ))),
           ),
         ],
       ),

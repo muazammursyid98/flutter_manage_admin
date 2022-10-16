@@ -32,7 +32,7 @@ class RevenueSectionSmall extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomText(
-                  text: "Expenses Chart",
+                  text: "Sales Chart",
                   size: 20,
                   weight: FontWeight.bold,
                   color: lightGrey,
@@ -57,24 +57,24 @@ class RevenueSectionSmall extends StatelessWidget {
                 Row(
                   children: const [
                     RevenueInfo(
-                      title: "Today's expenses",
-                      amount: "230",
+                      title: "Today's sales",
+                      amount: "0",
                     ),
                     RevenueInfo(
-                      title: "Last 7 days",
-                      amount: "1,100",
+                      title: "This week sales",
+                      amount: "0",
                     ),
                   ],
                 ),
                 Row(
                   children: const [
                     RevenueInfo(
-                      title: "Last 30 days",
-                      amount: "3,230",
+                      title: "This month sales",
+                      amount: "0",
                     ),
                     RevenueInfo(
-                      title: "Last 12 months",
-                      amount: "11,300",
+                      title: "This year sales",
+                      amount: "0",
                     ),
                   ],
                 ),
