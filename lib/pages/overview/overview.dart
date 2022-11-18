@@ -34,7 +34,10 @@ class OverviewPage extends StatelessWidget {
             )),
         Obx(() => counterController.isLoading.value
             ? const Expanded(child: Center(child: CircularProgressIndicator()))
-            : Expanded(
+            : Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 1 - 100,
+                margin:const EdgeInsets.only(bottom: 10),
                 child: SfCalendar(
                   controller: counterController.controller.value,
                   initialDisplayDate: DateTime.now(),

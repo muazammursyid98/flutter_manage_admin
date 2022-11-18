@@ -43,17 +43,19 @@ class TransactionController extends GetxController {
   void getTransactionToday() async {
     nowCalled = "todayTransaction";
     String firstDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
-    dateTimeSelectedDisplay.value = firstDate;
-
-    statusRepsonseDisplay.value = [];
-    isLoading.value = true;
-    List<Record>? statusRepsonse =
-        await _transactionService.getTransactionToday();
-
-    statusRepsonseDisplay.value = statusRepsonse ??= [];
+    dateTimeSelectedDisplay.value = "-";
     Future.delayed(const Duration(milliseconds: 500), () {
       isLoading.value = false;
     });
+    // statusRepsonseDisplay.value = [];
+    // isLoading.value = true;
+    // List<Record>? statusRepsonse =
+    //     await _transactionService.getTransactionToday();
+
+    // statusRepsonseDisplay.value = statusRepsonse ??= [];
+    // Future.delayed(const Duration(milliseconds: 500), () {
+    //   isLoading.value = false;
+    // });
   }
 
   void getTransactionByDateRange(

@@ -1,8 +1,10 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/style.dart';
 import '../../../controller/expenditure_controller.dart';
+import '../../../controllers/sales_controller.dart';
 
 /* class SimpleBarChart extends StatelessWidget {
   final List<charts.Series<dynamic, String>> seriesList;
@@ -82,14 +84,16 @@ class SimpleBarChart extends StatelessWidget {
 
   /// Create one series with sample hard coded data.
   static List<charts.Series<OrdinalSales, String>> _createSampleData() {
+    final SalesController counterController = Get.put(SalesController());
     final data = [
-      OrdinalSales('Today', 55),
-      OrdinalSales('Yesterday', 25),
-      OrdinalSales('2 days', 100),
-      OrdinalSales('24 Jun', 75),
-      OrdinalSales('23 Jun', 15),
-      OrdinalSales('22 Jun', 85),
-      OrdinalSales('21 Jun', 45),
+      OrdinalSales('Today',
+          int.parse(counterController.salesDisplay.value!.salesToday!)),
+      OrdinalSales('Week',
+          int.parse(counterController.salesDisplay.value!.salesWeekly!)),
+      OrdinalSales('Month',
+          int.parse(counterController.salesDisplay.value!.salesMonthly!)),
+      OrdinalSales('Year',
+          int.parse(counterController.salesDisplay.value!.salesYearly!)),
     ];
 
     return [

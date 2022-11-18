@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/style.dart';
+import '../../../controllers/sales_controller.dart';
 import '../../../widgets/custom_text.dart';
 import 'bar_chart.dart';
-import 'revenue_info.dart';
+import '../../overview/widgets/revenue_info.dart';
 
 class RevenueSectionSmall extends StatelessWidget {
-  const RevenueSectionSmall({Key? key}) : super(key: key);
+  RevenueSectionSmall({Key? key}) : super(key: key);
+
+  final SalesController counterController = Get.put(SalesController());
 
   @override
   Widget build(BuildContext context) {
@@ -55,26 +59,27 @@ class RevenueSectionSmall extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     RevenueInfo(
                       title: "Today's sales",
-                      amount: "0",
+                      amount: counterController.salesDisplay.value!.salesToday,
                     ),
                     RevenueInfo(
                       title: "This week sales",
-                      amount: "0",
+                      amount: counterController.salesDisplay.value!.salesWeekly,
                     ),
                   ],
                 ),
                 Row(
-                  children: const [
+                  children: [
                     RevenueInfo(
                       title: "This month sales",
-                      amount: "0",
+                      amount:
+                          counterController.salesDisplay.value!.salesMonthly,
                     ),
                     RevenueInfo(
                       title: "This year sales",
-                      amount: "0",
+                      amount: counterController.salesDisplay.value!.salesYearly,
                     ),
                   ],
                 ),

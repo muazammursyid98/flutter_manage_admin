@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/style.dart';
+import '../../../controllers/sales_controller.dart';
 import '../../../widgets/custom_text.dart';
 import 'bar_chart.dart';
-import 'revenue_info.dart';
+import '../../overview/widgets/revenue_info.dart';
 
 class RevenueSectionLarge extends StatelessWidget {
+  final SalesController counterController = Get.put(SalesController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,14 +55,14 @@ class RevenueSectionLarge extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     RevenueInfo(
                       title: "Today's sales",
-                      amount: "0",
+                      amount: counterController.salesDisplay.value!.salesToday,
                     ),
                     RevenueInfo(
                       title: "This week sales",
-                      amount: "0",
+                      amount: counterController.salesDisplay.value!.salesWeekly,
                     ),
                   ],
                 ),
@@ -66,14 +70,15 @@ class RevenueSectionLarge extends StatelessWidget {
                   height: 30,
                 ),
                 Row(
-                  children: const [
+                  children: [
                     RevenueInfo(
                       title: "This month sales",
-                      amount: "0",
+                      amount:
+                          counterController.salesDisplay.value!.salesMonthly,
                     ),
                     RevenueInfo(
                       title: "This year sales",
-                      amount: "0",
+                      amount: counterController.salesDisplay.value!.salesYearly,
                     ),
                   ],
                 ),
