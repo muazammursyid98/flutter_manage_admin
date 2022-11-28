@@ -37,7 +37,7 @@ class OverviewPage extends StatelessWidget {
             : Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height / 1 - 100,
-                margin:const EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.only(bottom: 10),
                 child: SfCalendar(
                   controller: counterController.controller.value,
                   initialDisplayDate: DateTime.now(),
@@ -137,7 +137,7 @@ class OverviewPage extends StatelessWidget {
     // counterController.isLoading(true);
     for (var item in counterController.displayDateCalendar) {
       DateTime dateTimeDisplay = DateTime.parse(item["dateTimeCalendar"]);
-      meetings.add(Meeting('- ${item["count"]} Purchases Ticket',
+      meetings.add(Meeting('  ${item["count"]} Purchases Ticket',
           dateTimeDisplay, dateTimeDisplay, const Color(0xFF0F8644), false));
     }
     counterController.isLoading.value = false;

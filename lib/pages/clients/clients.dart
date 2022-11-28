@@ -1,4 +1,5 @@
 import 'package:dext_expenditure_dashboard/pages/clients/widgets/add_activity.dart';
+import 'package:dext_expenditure_dashboard/pages/clients/widgets/add_image_activity.dart';
 import 'package:dext_expenditure_dashboard/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,6 +44,17 @@ class ClientsPage extends StatelessWidget {
                 },
                 child: const Text("Add New Activity")),
             const SizedBox(width: 9),
+            ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        return const AddImageActivity();
+                      }).then((value) {
+                    counterController.onInit();
+                  });
+                },
+                child: const Text("Modify Image Activity")),
           ],
         ),
         const SizedBox(height: 30),

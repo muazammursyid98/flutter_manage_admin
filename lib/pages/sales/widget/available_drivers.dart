@@ -64,7 +64,7 @@ class _AvailableDriversTableState extends State<AvailableDriversTable> {
               width: 10,
             ),
             CustomText(
-              text: "List of Users Purchased Ticket",
+              text: "Top of Users Purchased Ticket",
               color: lightGrey,
               weight: FontWeight.bold,
             )

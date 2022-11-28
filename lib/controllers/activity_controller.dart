@@ -30,6 +30,8 @@ class ActivityController extends GetxController {
     });
   }
 
+  
+
   Future updateTheActivity(jsons) async {
     isLoading.value = true;
     int statusRepsonse = await _activityService.updateActivity(jsons);

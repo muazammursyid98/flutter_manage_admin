@@ -38,6 +38,8 @@ class Record {
   Record(
       {this.activityId,
       this.activityName,
+      this.shortDescription,
+      this.packageIclusive,
       this.activityAvailable,
       this.activityLocation,
       this.activityAsset,
@@ -45,6 +47,8 @@ class Record {
 
   String? activityId;
   String? activityName;
+  String? shortDescription;
+  String? packageIclusive;
   String? activityAvailable;
   String? activityLocation;
   String? activityAsset;
@@ -53,6 +57,14 @@ class Record {
   factory Record.fromJson(Map<String, dynamic> json) => Record(
         activityId: json["activityId"],
         activityName: json["activityName"],
+        shortDescription:
+            json["shortDescription"] == null || json["shortDescription"] == ""
+                ? ""
+                : Uri.decodeComponent(json["shortDescription"]),
+        packageIclusive:
+            json["packageIclusive"] == null || json["packageIclusive"] == ""
+                ? ""
+                : Uri.decodeComponent(json["packageIclusive"]),
         activityAvailable: json["activityAvailable"] == null
             ? null
             : json["activityAvailable"],

@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+
 SessionTime sessionTimeFromJson(String str) =>
     SessionTime.fromJson(json.decode(str));
 
@@ -44,12 +46,15 @@ class Session {
     this.shiftName,
     this.startTime,
     this.endTime,
+    this.isSelected = false,
   });
 
   int? shiftId;
   String? shiftName;
   String? startTime;
   String? endTime;
+  bool? isSelected = false;
+  TextEditingController? descriptionTableTime = TextEditingController(text: "");
 
   factory Session.fromJson(Map<String, dynamic> json) => Session(
         shiftId: int.parse(json["shiftId"]),
