@@ -30,6 +30,8 @@ class MenuController extends GetxController {
         return _customIcon(Icons.money_off, itemName);
       case clientsPageDisplayName:
         return _customIcon(Icons.people_alt_outlined, itemName);
+      case specialPageDisplayName:
+        return _customIcon(Icons.book_online, itemName);
       case authenticationPageDisplayName:
         return _customIcon(Icons.exit_to_app, itemName);
       case salesPageDisplayName:

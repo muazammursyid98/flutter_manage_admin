@@ -1,4 +1,3 @@
-import 'package:dext_expenditure_dashboard/constants/controllers.dart';
 import 'package:dext_expenditure_dashboard/constants/style.dart';
 import 'package:dext_expenditure_dashboard/layout.dart';
 import 'package:dext_expenditure_dashboard/pages/authentication/authentication.dart';
@@ -9,13 +8,13 @@ import 'package:google_fonts/google_fonts.dart' show GoogleFonts;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'constants/size_config.dart';
-import 'controllers/menu_controller.dart';
+import 'controllers/menu_controller.dart' as menuController;
 import 'controllers/navigation_controller.dart';
 import 'pages/404/error.dart';
 import 'routing/routes.dart';
 
 void main() {
-  Get.put(MenuController());
+  Get.put(menuController.MenuController());
   Get.put(NavigationController());
   runApp(const MyApp());
 }

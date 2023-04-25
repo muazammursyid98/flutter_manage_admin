@@ -34,7 +34,11 @@ class AuthenticationPage extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 12),
-                            child: Image.asset("assets/icons/logo.png"),
+                            child: Image.asset(
+                              "assets/icons/logo.png",
+                              width: 80,
+                              height: 80,
+                            ),
                           ),
                           Expanded(child: Container()),
                         ],
@@ -88,7 +92,7 @@ class AuthenticationPage extends StatelessWidget {
                           Row(
                             children: [
                               Checkbox(value: true, onChanged: (value) {}),
-                              const CustomText(text: "Remeber Me"),
+                              const CustomText(text: "Remember Me"),
                             ],
                           ),
                           //CustomText(text: "Forgot password?", color: active)

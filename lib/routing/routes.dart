@@ -9,6 +9,9 @@ const transactionPageRoute = "/transaction";
 const clientsPageDisplayName = "Activity";
 const clientsPageRoute = "/clients";
 
+const specialPageDisplayName = "Special Booking";
+const specialPageRoute = "/special";
+
 const salesPageDisplayName = "Sales";
 const salesPageRoute = "/sales";
 
@@ -25,6 +28,7 @@ class MenuItem {
 List<MenuItem> sideMenuItems = [
   MenuItem(overviewPageDisplayName, overviewPageRoute),
   MenuItem(transactionPageDisplayName, transactionPageRoute),
+  MenuItem(specialPageDisplayName, specialPageRoute),
   MenuItem(clientsPageDisplayName, clientsPageRoute),
   MenuItem(salesPageDisplayName, salesPageRoute),
   MenuItem(authenticationPageDisplayName, authenticationPageRoute),

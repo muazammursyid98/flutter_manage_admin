@@ -1,3 +1,4 @@
+import 'package:dext_expenditure_dashboard/pages/special/special_book.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -16,8 +17,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(OverviewPage());
     case transactionPageRoute:
       return _getPageRoute(const TransactionPage());
+    case specialPageRoute:
+      return _getPageRoute(SpecialBook());
     case clientsPageRoute:
       return _getPageRoute(ClientsPage());
+
     case salesPageRoute:
       return _getPageRoute(SalesPage());
     default:

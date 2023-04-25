@@ -39,6 +39,8 @@ class ListTransaction {
 class Record {
   Record({
     this.registrantOrderId,
+    this.orderId,
+    this.activityId,
     this.name,
     this.phoneNumber,
     this.email,
@@ -51,6 +53,8 @@ class Record {
   });
 
   String? registrantOrderId;
+  String? orderId;
+  String? activityId;
   String? name;
   String? phoneNumber;
   String? email;
@@ -63,6 +67,8 @@ class Record {
 
   factory Record.fromJson(Map<String, dynamic> json) => Record(
         registrantOrderId: json["registrantOrderId"],
+        orderId: json["orderId"],
+        activityId: json["activityId"],
         name: json["name"],
         phoneNumber: json["phoneNumber"],
         email: json["email"],

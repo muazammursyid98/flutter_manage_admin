@@ -69,69 +69,71 @@ class _AvailableDriversTableState extends State<AvailableDriversTable> {
               weight: FontWeight.bold,
             )
           ]),
-          SingleChildScrollView(
+          Expanded(
             child: ConstrainedBox(
                 constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height * 0.51),
-                child: Obx(() => counterController.isLoading.value == true
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : DataTable2(
-                        columnSpacing: 12,
-                        horizontalMargin: 12,
-                        minWidth: 1200,
-                        columns: const [
-                          DataColumn2(
-                            label: Text('Name'),
-                            size: ColumnSize.L,
-                          ),
-                          DataColumn(
-                            label: Text('Phone Number'),
-                          ),
-                          DataColumn(
-                            label: Text('Email'),
-                          ),
-                          DataColumn(
-                            label: Text('Purchased Count'),
-                          ),
-                        ],
-                        rows: List<DataRow>.generate(
-                            counterController
-                                .statusRepsonseDisplay.value.length, (index) {
-                          final item =
-                              counterController.statusRepsonseDisplay[index];
-                          return DataRow(
-                            cells: [
-                              DataCell(CustomText(text: item.name)),
-                              DataCell(CustomText(
-                                text: item.phoneNumber,
-                              )),
-                              DataCell(Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  // const Icon(Icons.star,
-                                  //     color: Colors.deepOrange,
-                                  //     size: 18),
-                                  // const SizedBox(width: 5),
-                                  CustomText(text: item.email),
-                                ],
-                              )),
-                              DataCell(Container(
-                                /* decoration: BoxDecoration(
+                    maxHeight: MediaQuery.of(context).size.height * 0.55),
+                child: Obx(
+                  () => counterController.isLoading.value == true
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : DataTable2(
+                          columnSpacing: 12,
+                          horizontalMargin: 12,
+                          minWidth: 1200,
+                          columns: const [
+                            DataColumn2(
+                              label: Text('Name'),
+                              size: ColumnSize.L,
+                            ),
+                            DataColumn(
+                              label: Text('Phone Number'),
+                            ),
+                            DataColumn(
+                              label: Text('Email'),
+                            ),
+                            DataColumn(
+                              label: Text('Purchased Count'),
+                            ),
+                          ],
+                          rows: List<DataRow>.generate(
+                              counterController
+                                  .statusRepsonseDisplay.value.length, (index) {
+                            final item =
+                                counterController.statusRepsonseDisplay[index];
+                            return DataRow(
+                              cells: [
+                                DataCell(CustomText(text: item.name)),
+                                DataCell(CustomText(
+                                  text: item.phoneNumber,
+                                )),
+                                DataCell(Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    // const Icon(Icons.star,
+                                    //     color: Colors.deepOrange,
+                                    //     size: 18),
+                                    // const SizedBox(width: 5),
+                                    CustomText(text: item.email),
+                                  ],
+                                )),
+                                DataCell(Container(
+                                  /* decoration: BoxDecoration(
                                   border: Border.all(color: active, width: 5),
                                   color: light,
                                   borderRadius: BorderRadius.circular(20)), */
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 6),
-                                child: CustomText(
-                                  text: item.count,
-                                ),
-                              )),
-                            ],
-                          );
-                        }),
-                      ))),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 6),
+                                  child: CustomText(
+                                    text: item.count,
+                                  ),
+                                )),
+                              ],
+                            );
+                          }),
+                        ),
+                )),
           ),
         ],
       ),

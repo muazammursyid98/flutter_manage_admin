@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/controllers.dart';
+import '../../controllers/overview_controller.dart';
 import '../../controllers/transaction_controller.dart';
 import '../../helpers/responsiveness.dart';
 import '../clients/widgets/special_booking.dart';
+import '../overview/overview.dart';
 import 'widgets/drivers_table.dart';
 
 class TransactionPage extends StatelessWidget {
@@ -17,7 +19,6 @@ class TransactionPage extends StatelessWidget {
     var config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.range,
       selectedDayHighlightColor: Colors.purple[800],
-      shouldCloseDialogAfterCancelTapped: true,
     );
 
     final TransactionController counterController =
@@ -88,17 +89,23 @@ class TransactionPage extends StatelessWidget {
                 },
                 child: const Text("Select Date By Range")),
             const SizedBox(width: 9),
-            ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (_) {
-                        return const DialogSpecialBooking();
-                      }).then((value) {
-                    counterController.onInit();
-                  });
-                },
-                child: const Text("Special Booking")),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       showDialog(
+            //           context: context,
+            //           builder: (_) {
+            //             return const DialogSpecialBooking();
+            //           }).then((value) {
+            //         counterController.dateTimeSelectedDisplay.value = "-";
+            //         counterController.statusRepsonseDisplay.value = [];
+            //         if (!menuController.isActive('Overview')) {
+            //           menuController.changeActiveItemTo('Overview');
+            //           if (ResponsiveWidget.isSmallScreen(context)) Get.back();
+            //           navigationController.navigateTo('/overview');
+            //         }
+            //       });
+            //     },
+            //     child: const Text("Special Booking")),
           ],
         ),
         const SizedBox(height: 30),

@@ -4,21 +4,25 @@ import 'package:intl/intl.dart';
 
 import '../model/transaction_model.dart';
 
+import '../service/activity_service.dart';
 import '../service/transaction_service.dart';
 
 class TransactionController extends GetxController {
   final TransactionService _transactionService = TransactionService();
+  final ActivityService _activityService = ActivityService();
 
   var statusRepsonseDisplay = [].obs;
   var isLoading = true.obs;
   String nowCalled = "";
   RxString dateTimeSelectedDisplay = "".obs;
 
-  var activityList = [].obs;
+  var listActivity = [].obs;
 
   @override
   void onInit() {
     getTransactionToday();
+    getTheActivity();
+
     super.onInit();
   }
 
@@ -26,6 +30,16 @@ class TransactionController extends GetxController {
   void dispose() {
     Get.delete<TransactionService>();
     super.dispose();
+  }
+
+  void getTheActivity() async {
+    isLoading.value = true;
+    var statusRepsonse = await _activityService.getActivity();
+
+    listActivity.value = statusRepsonse ??= [];
+    Future.delayed(const Duration(milliseconds: 500), () {
+      isLoading.value = false;
+    });
   }
 
   void getTransaction() async {
@@ -64,6 +78,8 @@ class TransactionController extends GetxController {
     nowCalled = "transaction";
     statusRepsonseDisplay.value = [];
     isLoading.value = true;
+    print(firstDate);
+    print(endDate);
     List<Record>? statusRepsonse = await _transactionService
         .getTransactionByDateRange(startDate: firstDate, endDate: endDate);
 

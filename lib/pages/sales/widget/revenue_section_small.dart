@@ -60,26 +60,37 @@ class RevenueSectionSmall extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    RevenueInfo(
-                      title: "Today's sales",
-                      amount: counterController.salesDisplay.value!.salesToday,
+                    Obx(
+                      () => RevenueInfo(
+                        title: "Today's sales",
+                        amount:
+                            counterController.salesDisplay.value!.salesToday,
+                      ),
                     ),
-                    RevenueInfo(
-                      title: "This week sales",
-                      amount: counterController.salesDisplay.value!.salesWeekly,
+                    Obx(
+                      () => RevenueInfo(
+                        title: "This week sales",
+                        amount:
+                            counterController.salesDisplay.value!.salesWeekly,
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    RevenueInfo(
-                      title: "This month sales",
-                      amount:
-                          counterController.salesDisplay.value!.salesMonthly,
+                    Obx(
+                      () => RevenueInfo(
+                        title: "This month sales",
+                        amount:
+                            counterController.salesDisplay.value!.salesMonthly,
+                      ),
                     ),
-                    RevenueInfo(
-                      title: "This year sales",
-                      amount: counterController.salesDisplay.value!.salesYearly,
+                    Obx(
+                      () => RevenueInfo(
+                        title: "This year sales",
+                        amount:
+                            counterController.salesDisplay.value!.salesYearly,
+                      ),
                     ),
                   ],
                 ),

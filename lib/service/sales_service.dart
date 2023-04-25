@@ -18,7 +18,7 @@ class SalesService {
     ).catchError((onError) {
       const SnackBars().snackBarFail("Error", "");
     });
-
+    print(response.body);
     if (response.statusCode == 200) {
       final salesSummary = salesSummaryFromJson(response.body);
       return salesSummary;

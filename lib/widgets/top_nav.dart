@@ -29,7 +29,7 @@ AppBar topNaigatorBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
             Visibility(
                 visible: !ResponsiveWidget.isSmallScreen(context),
                 child: CustomText(
-                  text: "ADREN X PARK",
+                  text: "",
                   color: lightGrey,
                   size: 20,
                   weight: FontWeight.bold,

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:intl/intl.dart';
+import 'package:nanoid/nanoid.dart';
 
 import '../../../constants/condition_size.dart';
 import '../../../controllers/transaction_controller.dart';
@@ -73,7 +74,6 @@ class _DialogSpecialBookingState extends State<DialogSpecialBooking> {
     var config = CalendarDatePicker2WithActionButtonsConfig(
       calendarType: CalendarDatePicker2Type.single,
       selectedDayHighlightColor: Colors.purple[800],
-      shouldCloseDialogAfterCancelTapped: true,
     );
     return AlertDialog(
       shape: const RoundedRectangleBorder(
@@ -362,6 +362,7 @@ class _DialogSpecialBookingState extends State<DialogSpecialBooking> {
                             child: ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
+                                  var customLengthId = nanoid(10);
                                   var jsons = {
                                     "activitiesId":
                                         _selectedActivity.toString(),
@@ -372,9 +373,10 @@ class _DialogSpecialBookingState extends State<DialogSpecialBooking> {
                                     "firstPhoneNumberRegister":
                                         phoneNumber.text,
                                     "firstEmailRegister": emailPerson.text,
-                                    "temporaryUnique": "custom",
+                                    "temporaryUnique": customLengthId,
                                     "totalPrice": totalPrice.text
                                   };
+                                  print(jsons);
                                   int status = await _activityService
                                       .goToInsertSpecialBooking(jsons);
                                   if (status == 200) {

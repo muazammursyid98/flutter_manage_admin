@@ -21,7 +21,7 @@ class RevenueInfo extends StatelessWidget {
                 text: "RM $amount",
                 style: const TextStyle(
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     color: Colors.black)),
           ])),
     );

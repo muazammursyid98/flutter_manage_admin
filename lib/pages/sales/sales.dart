@@ -12,9 +12,29 @@ import '../overview/widgets/overview_cards_large.dart';
 import '../overview/widgets/overview_cards_medium.dart';
 import '../overview/widgets/overview_cards_small.dart';
 
-class SalesPage extends StatelessWidget {
+class SalesPage extends StatefulWidget {
   SalesPage({Key? key}) : super(key: key);
+
+  @override
+  State<SalesPage> createState() => _SalesPageState();
+}
+
+class _SalesPageState extends State<SalesPage> {
   final SalesController counterController = Get.put(SalesController());
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      counterController.onInit();
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    counterController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

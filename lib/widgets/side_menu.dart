@@ -1,6 +1,7 @@
 import 'package:dext_expenditure_dashboard/pages/authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../constants/controllers.dart';
 import '../constants/style.dart';
@@ -31,12 +32,15 @@ class SideMenu extends StatelessWidget {
                   children: [
                     SizedBox(width: _width / 48),
                     Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: Image.asset("assets/icons/logo.png"),
+                      padding: EdgeInsets.only(right: 12.w),
+                      child: Image.asset(
+                        "assets/icons/logo.png",
+                        height: 10.h,
+                      ),
                     ),
                     Flexible(
                       child: CustomText(
-                        text: "ADREN X PARK",
+                        text: "",
                         size: 20,
                         weight: FontWeight.bold,
                         color: active,

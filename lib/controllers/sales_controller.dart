@@ -19,7 +19,6 @@ class SalesController extends GetxController {
     isLoading.value = true;
     SalesSummary? statusRepsonse = await _salesService.getSales();
     salesDisplay.value = statusRepsonse!;
-
     Future.delayed(const Duration(milliseconds: 500), () {
       isLoading.value = false;
     });

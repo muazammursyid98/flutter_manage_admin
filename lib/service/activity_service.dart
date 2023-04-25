@@ -135,8 +135,26 @@ class ActivityService {
 
   Future goToInsertSpecialBooking(jsons) async {
     final response = await post(
-      Uri.parse(
-          'https://rentasadventures.com/API/insert_image_details_activities.php'),
+      Uri.parse('https://rentasadventures.com/API/special_booking.php'),
+      headers: <String, String>{
+        // 'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{'authKey': "key123", ...jsons}),
+    ).catchError((onError) {
+      print(onError);
+      const SnackBars().snackBarFail("Error", "");
+    });
+
+    if (response.statusCode == 200) {
+      return 200;
+    } else {
+      return 400;
+    }
+  }
+
+  Future goToUpdateDateBooking(jsons) async {
+    final response = await post(
+      Uri.parse('https://rentasadventures.com/API/update_date_booking.php'),
       headers: <String, String>{
         // 'Content-Type': 'application/json; charset=UTF-8',
       },
